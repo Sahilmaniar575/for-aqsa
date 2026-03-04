@@ -122,16 +122,59 @@ button:hover {
 
 <script>
 // Typewriter Effect
-const text = "In a world full of code, you are my favorite commit. You changed my life beautifully. Will you merge your forever with mine? 💖";
-let i = 0;
-function typeWriter() {
-  if (i < text.length) {
-    document.getElementById("message").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeWriter, 40);
+const chapters = [
+  "Aqsa… close your eyes for a second and just breathe. Because what you’re about to read comes straight from my heart.",
+  
+  "From the day you came into my life, something shifted. It wasn’t loud. It wasn’t dramatic. But it was real. And it was powerful.",
+  
+  "You became my comfort in chaos. My calm in confusion. My peace in pressure. And slowly… without even realizing… you became my home.",
+  
+  "As a developer, you understand logic. Structure. Systems. But with you, love doesn’t feel like logic. It feels effortless. Natural. Beautiful.",
+  
+  "In a world full of temporary connections, you are permanent. In a world full of noise, you are clarity.",
+  
+  "Every time you smile, my entire world resets. Every time you support me, I feel unstoppable. Every time you believe in me, I grow stronger.",
+  
+  "If life is a long project, I don’t want different collaborators. I want one partner. One teammate. One forever. And that is you.",
+  
+  "I don’t just love you for who you are today. I love you for who you are becoming. For your dreams. Your strength. Your intelligence. Your heart.",
+  
+  "With you, I don’t just see months. I see years. I see growth. I see late-night talks, shared struggles, shared wins, shared dreams.",
+  
+  "And today… I am not asking out of impulse. I am asking with clarity. With intention. With maturity.",
+  
+  "Aqsa… will you choose to build this life with me? Will you let us write the most beautiful story together?",
+  
+  "Will you be mine… not just in this moment… but in every chapter yet to come? 💖"
+];
+
+let chapterIndex = 0;
+let charIndex = 0;
+const speed = 35;          // typing speed
+const pauseBetween = 2000; // pause between chapters
+
+function typeChapter() {
+  if (chapterIndex >= chapters.length) {
+    document.querySelector(".buttons").style.opacity = "1";
+    return;
+  }
+
+  const messageDiv = document.getElementById("message");
+
+  if (charIndex < chapters[chapterIndex].length) {
+    messageDiv.innerHTML += chapters[chapterIndex].charAt(charIndex);
+    charIndex++;
+    setTimeout(typeChapter, speed);
+  } else {
+    messageDiv.innerHTML += "<br><br>";
+    chapterIndex++;
+    charIndex = 0;
+    setTimeout(typeChapter, pauseBetween);
   }
 }
-typeWriter();
+
+document.querySelector(".buttons").style.opacity = "0";
+typeChapter();
 
 // Move NO button
 function dodge(btn) {
