@@ -122,6 +122,25 @@ button:hover {
 </div>
 
 <script>
+const music = document.getElementById("bgMusic");
+
+function startMusic() {
+  music.volume = 0;
+  music.play().catch(() => {});
+
+  let vol = 0;
+  const fade = setInterval(() => {
+    if (vol < 0.7) {
+      vol += 0.02;
+      music.volume = vol;
+    } else {
+      clearInterval(fade);
+    }
+  }, 200);
+}
+
+// Browser requires user interaction to start audio
+window.addEventListener("click", startMusic, { once: true });
 // Typewriter Effect
 const chapters = [
   "Aqsa… close your eyes for a second and just breathe. Because what you’re about to read comes straight from my heart.",
