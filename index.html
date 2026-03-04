@@ -1,1 +1,199 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>For Aqsa ❤️</title> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"> <style> :root { --primary: #ff4e88; --secondary: #6a11cb; --bg1: #141e30; --bg2: #243b55; } * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; } body { height: 100vh; overflow: hidden; background: linear-gradient(135deg, var(--bg1), var(--bg2)); display: flex; justify-content: center; align-items: center; color: white; } canvas { position: absolute; top: 0; left: 0; } .card { position: relative; z-index: 2; width: 90%; max-width: 500px; padding: 40px; border-radius: 20px; backdrop-filter: blur(20px); background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.4); text-align: center; animation: fadeIn 1.5s ease forwards; } h1 { font-weight: 600; margin-bottom: 20px; font-size: 28px; } #message { min-height: 60px; font-size: 18px; margin-bottom: 30px; } .buttons { display: flex; justify-content: center; gap: 20px; } button { padding: 12px 28px; border-radius: 50px; border: none; font-size: 16px; cursor: pointer; transition: all 0.3s ease; } .yes { background: var(--primary); color: white; } .no { background: transparent; border: 1px solid white; color: white; } button:hover { transform: scale(1.1); } @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } } .success { font-size: 26px; animation: fadeIn 1s ease forwards; } </style> </head> <body> <audio id="bgMusic" src="song.mp3" loop></audio> <canvas id="hearts"></canvas> <div class="card"> <h1>Hey Aqsa ❤️</h1> <div id="message"></div> <div class="buttons"> <button class="yes" onclick="acceptLove()">Yes 💍</button> <button class="no" onmouseover="dodge(this)">No 😜</button> </div> </div> <script> // Typewriter Effect const chapters = [ "Aqsa… close your eyes for a second and just breathe. Because what you’re about to read comes straight from my heart.", "From the day you came into my life, something shifted. It wasn’t loud. It wasn’t dramatic. But it was real. And it was powerful.", "You became my comfort in chaos. My calm in confusion. My peace in pressure. And slowly… without even realizing… you became my home.", "As a developer, you understand logic. Structure. Systems. But with you, love doesn’t feel like logic. It feels effortless. Natural. Beautiful.", "In a world full of temporary connections, you are permanent. In a world full of noise, you are clarity.", "Every time you smile, my entire world resets. Every time you support me, I feel unstoppable. Every time you believe in me, I grow stronger.", "If life is a long project, I don’t want different collaborators. I want one partner. One teammate. One forever. And that is you.", "I don’t just love you for who you are today. I love you for who you are becoming. For your dreams. Your strength. Your intelligence. Your heart.", "With you, I don’t just see months. I see years. I see growth. I see late-night talks, shared struggles, shared wins, shared dreams.", "And today… I am not asking out of impulse. I am asking with clarity. With intention. With maturity.", "Aqsa… will you choose to build this life with me? Will you let us write the most beautiful story together?", "Will you be mine… not just in this moment… but in every chapter yet to come? 💖" ]; let chapterIndex = 0; let charIndex = 0; const speed = 35; // typing speed const pauseBetween = 2000; // pause between chapters function typeChapter() { if (chapterIndex >= chapters.length) { document.querySelector(".buttons").style.opacity = "1"; return; } const messageDiv = document.getElementById("message"); if (charIndex < chapters[chapterIndex].length) { messageDiv.innerHTML += chapters[chapterIndex].charAt(charIndex); charIndex++; setTimeout(typeChapter, speed); } else { messageDiv.innerHTML += "<br><br>"; chapterIndex++; charIndex = 0; setTimeout(typeChapter, pauseBetween); } } document.querySelector(".buttons").style.opacity = "0"; typeChapter(); // Move NO button function dodge(btn) { btn.style.position = "absolute"; btn.style.left = Math.random() * (window.innerWidth - 100) + "px"; btn.style.top = Math.random() * (window.innerHeight - 50) + "px"; } // YES Click function acceptLove() { const card = document.querySelector(".card"); card.style.display = "none"; // Flash effect const flash = document.createElement("div"); flash.style.position = "fixed"; flash.style.top = "0"; flash.style.left = "0"; flash.style.width = "100%"; flash.style.height = "100%"; flash.style.background = "white"; flash.style.opacity = "1"; flash.style.transition = "opacity 1s ease"; flash.style.zIndex = "999"; document.body.appendChild(flash); setTimeout(() => { flash.style.opacity = "0"; }, 100); setTimeout(() => { flash.remove(); }, 1200); // Create heart explosion for (let i = 0; i < 80; i++) { createExplosionHeart(); } // Final message const finalMessage = document.createElement("div"); finalMessage.innerHTML = <div style=" position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); font-size:34px; text-align:center; color:white; animation: fadeIn 2s ease forwards; text-shadow: 0 0 20px rgba(255,78,136,0.8); "> Forever Begins Now ❤️<br> I Love You Aqsa 💍 </div> ; document.body.appendChild(finalMessage); } function createExplosionHeart() { const heart = document.createElement("div"); heart.innerHTML = "❤️"; heart.style.position = "fixed"; heart.style.left = "50%"; heart.style.top = "50%"; heart.style.fontSize = Math.random() * 20 + 20 + "px"; heart.style.transform = "translate(-50%, -50%)"; heart.style.zIndex = "998"; const angle = Math.random() * 2 * Math.PI; const distance = Math.random() * 400 + 100; const x = Math.cos(angle) * distance; const y = Math.sin(angle) * distance; heart.animate( [ { transform: "translate(-50%, -50%) scale(1)", opacity: 1 }, { transform: translate(${x}px, ${y}px) scale(1.5), opacity: 0 } ], { duration: 2500, easing: "cubic-bezier(0.22, 1, 0.36, 1)", fill: "forwards" } ); document.body.appendChild(heart); setTimeout(() => { heart.remove(); }, 2000); } // Canvas Floating Hearts const canvas = document.getElementById("hearts"); const ctx = canvas.getContext("2d"); canvas.width = window.innerWidth; canvas.height = window.innerHeight; window.addEventListener("resize", () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }); let particles = []; class Heart { constructor() { this.x = Math.random() * canvas.width; this.y = canvas.height + 20; this.size = Math.random() * 15 + 10; this.speed = Math.random() * 1.5 + 0.5; } draw() { ctx.fillStyle = "rgba(255,78,136,0.8)"; ctx.beginPath(); ctx.moveTo(this.x, this.y); ctx.bezierCurveTo(this.x - this.size/2, this.y - this.size/2, this.x - this.size, this.y + this.size/3, this.x, this.y + this.size); ctx.bezierCurveTo(this.x + this.size, this.y + this.size/3, this.x + this.size/2, this.y - this.size/2, this.x, this.y); ctx.fill(); } update() { this.y -= this.speed; this.draw(); } } function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); if (particles.length < 120) { particles.push(new Heart()); } particles.forEach((heart, index) => { heart.update(); if (heart.y < -20) particles.splice(index, 1); }); requestAnimationFrame(animate); } animate(); </script> </body> </html><!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>For Aqsa ❤️</title> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"> <style> :root { --primary: #ff4e88; --secondary: #6a11cb; --bg1: #141e30; --bg2: #243b55; } * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; } body { height: 100vh; overflow: hidden; background: linear-gradient(135deg, var(--bg1), var(--bg2)); display: flex; justify-content: center; align-items: center; color: white; } canvas { position: absolute; top: 0; left: 0; } .card { position: relative; z-index: 2; width: 90%; max-width: 500px; padding: 40px; border-radius: 20px; backdrop-filter: blur(20px); background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.4); text-align: center; animation: fadeIn 1.5s ease forwards; } h1 { font-weight: 600; margin-bottom: 20px; font-size: 28px; } #message { min-height: 60px; font-size: 18px; margin-bottom: 30px; } .buttons { display: flex; justify-content: center; gap: 20px; } button { padding: 12px 28px; border-radius: 50px; border: none; font-size: 16px; cursor: pointer; transition: all 0.3s ease; } .yes { background: var(--primary); color: white; } .no { background: transparent; border: 1px solid white; color: white; } button:hover { transform: scale(1.1); } @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } } .success { font-size: 26px; animation: fadeIn 1s ease forwards; } </style> </head> <body> <audio id="bgMusic" src="song.mp3" loop></audio> <canvas id="hearts"></canvas> <div class="card"> <h1>Hey Aqsa ❤️</h1> <div id="message"></div> <div class="buttons"> <button class="yes" onclick="acceptLove()">Yes 💍</button> <button class="no" onmouseover="dodge(this)">No 😜</button> </div> </div> <script> // Typewriter Effect const chapters = [ "Aqsa… close your eyes for a second and just breathe. Because what you’re about to read comes straight from my heart.", "From the day you came into my life, something shifted. It wasn’t loud. It wasn’t dramatic. But it was real. And it was powerful.", "You became my comfort in chaos. My calm in confusion. My peace in pressure. And slowly… without even realizing… you became my home.", "As a developer, you understand logic. Structure. Systems. But with you, love doesn’t feel like logic. It feels effortless. Natural. Beautiful.", "In a world full of temporary connections, you are permanent. In a world full of noise, you are clarity.", "Every time you smile, my entire world resets. Every time you support me, I feel unstoppable. Every time you believe in me, I grow stronger.", "If life is a long project, I don’t want different collaborators. I want one partner. One teammate. One forever. And that is you.", "I don’t just love you for who you are today. I love you for who you are becoming. For your dreams. Your strength. Your intelligence. Your heart.", "With you, I don’t just see months. I see years. I see growth. I see late-night talks, shared struggles, shared wins, shared dreams.", "And today… I am not asking out of impulse. I am asking with clarity. With intention. With maturity.", "Aqsa… will you choose to build this life with me? Will you let us write the most beautiful story together?", "Will you be mine… not just in this moment… but in every chapter yet to come? 💖" ]; let chapterIndex = 0; let charIndex = 0; const speed = 35; // typing speed const pauseBetween = 2000; // pause between chapters function typeChapter() { if (chapterIndex >= chapters.length) { document.querySelector(".buttons").style.opacity = "1"; return; } const messageDiv = document.getElementById("message"); if (charIndex < chapters[chapterIndex].length) { messageDiv.innerHTML += chapters[chapterIndex].charAt(charIndex); charIndex++; setTimeout(typeChapter, speed); } else { messageDiv.innerHTML += "<br><br>"; chapterIndex++; charIndex = 0; setTimeout(typeChapter, pauseBetween); } } document.querySelector(".buttons").style.opacity = "0"; typeChapter(); // Move NO button function dodge(btn) { btn.style.position = "absolute"; btn.style.left = Math.random() * (window.innerWidth - 100) + "px"; btn.style.top = Math.random() * (window.innerHeight - 50) + "px"; } // YES Click function acceptLove() { const card = document.querySelector(".card"); card.style.display = "none"; // Flash effect const flash = document.createElement("div"); flash.style.position = "fixed"; flash.style.top = "0"; flash.style.left = "0"; flash.style.width = "100%"; flash.style.height = "100%"; flash.style.background = "white"; flash.style.opacity = "1"; flash.style.transition = "opacity 1s ease"; flash.style.zIndex = "999"; document.body.appendChild(flash); setTimeout(() => { flash.style.opacity = "0"; }, 100); setTimeout(() => { flash.remove(); }, 1200); // Create heart explosion for (let i = 0; i < 80; i++) { createExplosionHeart(); } // Final message const finalMessage = document.createElement("div"); finalMessage.innerHTML = <div style=" position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); font-size:34px; text-align:center; color:white; animation: fadeIn 2s ease forwards; text-shadow: 0 0 20px rgba(255,78,136,0.8); "> Forever Begins Now ❤️<br> I Love You Aqsa 💍 </div> ; document.body.appendChild(finalMessage); } function createExplosionHeart() { const heart = document.createElement("div"); heart.innerHTML = "❤️"; heart.style.position = "fixed"; heart.style.left = "50%"; heart.style.top = "50%"; heart.style.fontSize = Math.random() * 20 + 20 + "px"; heart.style.transform = "translate(-50%, -50%)"; heart.style.zIndex = "998"; const angle = Math.random() * 2 * Math.PI; const distance = Math.random() * 400 + 100; const x = Math.cos(angle) * distance; const y = Math.sin(angle) * distance; heart.animate( [ { transform: "translate(-50%, -50%) scale(1)", opacity: 1 }, { transform: translate(${x}px, ${y}px) scale(1.5), opacity: 0 } ], { duration: 2500, easing: "cubic-bezier(0.22, 1, 0.36, 1)", fill: "forwards" } ); document.body.appendChild(heart); setTimeout(() => { heart.remove(); }, 2000); } // Canvas Floating Hearts const canvas = document.getElementById("hearts"); const ctx = canvas.getContext("2d"); canvas.width = window.innerWidth; canvas.height = window.innerHeight; window.addEventListener("resize", () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }); let particles = []; class Heart { constructor() { this.x = Math.random() * canvas.width; this.y = canvas.height + 20; this.size = Math.random() * 15 + 10; this.speed = Math.random() * 1.5 + 0.5; } draw() { ctx.fillStyle = "rgba(255,78,136,0.8)"; ctx.beginPath(); ctx.moveTo(this.x, this.y); ctx.bezierCurveTo(this.x - this.size/2, this.y - this.size/2, this.x - this.size, this.y + this.size/3, this.x, this.y + this.size); ctx.bezierCurveTo(this.x + this.size, this.y + this.size/3, this.x + this.size/2, this.y - this.size/2, this.x, this.y); ctx.fill(); } update() { this.y -= this.speed; this.draw(); } } function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); if (particles.length < 120) { particles.push(new Heart()); } particles.forEach((heart, index) => { heart.update(); if (heart.y < -20) particles.splice(index, 1); }); requestAnimationFrame(animate); } animate(); </script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For Aqsa ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #ff4e88;
+  --secondary: #6a11cb;
+  --bg1: #141e30;
+  --bg2: #243b55;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--bg1), var(--bg2));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width: 500px;
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  text-align: center;
+  animation: fadeIn 1.5s ease forwards;
+}
+
+h1 {
+  font-weight: 600;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+#message {
+  min-height: 60px;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+button {
+  padding: 12px 28px;
+  border-radius: 50px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.yes {
+  background: var(--primary);
+  color: white;
+}
+
+.no {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.success {
+  font-size: 26px;
+  animation: fadeIn 1s ease forwards;
+}
+</style>
+</head>
+<body>
+
+<canvas id="hearts"></canvas>
+
+<div class="card">
+  <h1>Hey Aqsa ❤️</h1>
+  <div id="message"></div>
+
+  <div class="buttons">
+    <button class="yes" onclick="acceptLove()">Yes 💍</button>
+    <button class="no" onmouseover="dodge(this)">No 😜</button>
+  </div>
+</div>
+
+<script>
+// Typewriter Effect
+const text = "In a world full of code, you are my favorite commit. You changed my life beautifully. Will you merge your forever with mine? 💖";
+let i = 0;
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById("message").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 40);
+  }
+}
+typeWriter();
+
+// Move NO button
+function dodge(btn) {
+  btn.style.position = "absolute";
+  btn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+  btn.style.top = Math.random() * (window.innerHeight - 50) + "px";
+}
+
+// YES Click
+function acceptLove() {
+  document.querySelector(".card").innerHTML =
+    "<div class='success'>Forever begins now ❤️<br>I love you Aqsa 💍</div>";
+}
+
+// Canvas Floating Hearts
+const canvas = document.getElementById("hearts");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+class Heart {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = canvas.height + 20;
+    this.size = Math.random() * 15 + 10;
+    this.speed = Math.random() * 1.5 + 0.5;
+  }
+
+  draw() {
+    ctx.fillStyle = "rgba(255,78,136,0.8)";
+    ctx.beginPath();
+    ctx.moveTo(this.x, this.y);
+    ctx.bezierCurveTo(this.x - this.size/2, this.y - this.size/2,
+                      this.x - this.size, this.y + this.size/3,
+                      this.x, this.y + this.size);
+    ctx.bezierCurveTo(this.x + this.size, this.y + this.size/3,
+                      this.x + this.size/2, this.y - this.size/2,
+                      this.x, this.y);
+    ctx.fill();
+  }
+
+  update() {
+    this.y -= this.speed;
+    this.draw();
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.push(new Heart());
+  particles.forEach((heart, index) => {
+    heart.update();
+    if (heart.y < -20) particles.splice(index, 1);
+  });
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
+</body>
+</html>
