@@ -1,107 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>For Aqsa ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        text-align: center;
-        color: white;
-        overflow: hidden;
-    }
+:root {
+  --primary: #ff4e88;
+  --secondary: #6a11cb;
+  --bg1: #141e30;
+  --bg2: #243b55;
+}
 
-    .card {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        max-width: 400px;
-        animation: fadeIn 2s ease-in-out;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
 
-    h1 {
-        font-size: 28px;
-    }
+body {
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--bg1), var(--bg2));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
 
-    p {
-        font-size: 18px;
-        margin: 20px 0;
-    }
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
-    button {
-        padding: 12px 25px;
-        border: none;
-        border-radius: 30px;
-        font-size: 16px;
-        cursor: pointer;
-        margin: 10px;
-        transition: 0.3s;
-    }
+.card {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width: 500px;
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  text-align: center;
+  animation: fadeIn 1.5s ease forwards;
+}
 
-    .yes {
-        background: #ff4e50;
-        color: white;
-    }
+h1 {
+  font-weight: 600;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
 
-    .no {
-        background: white;
-        color: #ff4e50;
-        position: absolute;
-    }
+#message {
+  min-height: 60px;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
 
-    button:hover {
-        transform: scale(1.1);
-    }
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+button {
+  padding: 12px 28px;
+  border-radius: 50px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.yes {
+  background: var(--primary);
+  color: white;
+}
+
+.no {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.success {
+  font-size: 26px;
+  animation: fadeIn 1s ease forwards;
+}
 </style>
 </head>
 <body>
 
-<div class="card">
-    <h1>Hey Aqsa ❤️</h1>
-    <p>
-        From the day you came into my life, everything became brighter, happier, and more beautiful.
-        You are my peace, my happiness, my everything.
-    </p>
-    <p>
-        So today I want to ask you something special...
-    </p>
-    <h2>Will you be mine forever? 💍</h2>
+<canvas id="hearts"></canvas>
 
-    <button class="yes" onclick="sayYes()">Yes ❤️</button>
-    <button class="no" onmouseover="moveButton()">No 😜</button>
+<div class="card">
+  <h1>Hey Aqsa ❤️</h1>
+  <div id="message"></div>
+
+  <div class="buttons">
+    <button class="yes" onclick="acceptLove()">Yes 💍</button>
+    <button class="no" onmouseover="dodge(this)">No 😜</button>
+  </div>
 </div>
 
 <script>
-function sayYes() {
-    document.body.innerHTML = `
-        <div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#ff4e50;color:white;font-size:30px;text-align:center;">
-            Yaaayyyy ❤️ I Love You So Much Aqsa 💕 <br> Forever Starts Now 💍
-        </div>
-    `;
+// Typewriter Effect
+const text = "In a world full of code, you are my favorite commit. You changed my life beautifully. Will you merge your forever with mine? 💖";
+let i = 0;
+function typeWriter() {
+  if (i < text.length) {
+    document.getElementById("message").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 40);
+  }
+}
+typeWriter();
+
+// Move NO button
+function dodge(btn) {
+  btn.style.position = "absolute";
+  btn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+  btn.style.top = Math.random() * (window.innerHeight - 50) + "px";
 }
 
-function moveButton() {
-    const button = document.querySelector('.no');
-    const x = Math.random() * window.innerWidth - 100;
-    const y = Math.random() * window.innerHeight - 50;
-    button.style.left = x + "px";
-    button.style.top = y + "px";
+// YES Click
+function acceptLove() {
+  document.querySelector(".card").innerHTML =
+    "<div class='success'>Forever begins now ❤️<br>I love you Aqsa 💍</div>";
 }
+
+// Canvas Floating Hearts
+const canvas = document.getElementById("hearts");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+class Heart {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = canvas.height + 20;
+    this.size = Math.random() * 15 + 10;
+    this.speed = Math.random() * 1.5 + 0.5;
+  }
+
+  draw() {
+    ctx.fillStyle = "rgba(255,78,136,0.8)";
+    ctx.beginPath();
+    ctx.moveTo(this.x, this.y);
+    ctx.bezierCurveTo(this.x - this.size/2, this.y - this.size/2,
+                      this.x - this.size, this.y + this.size/3,
+                      this.x, this.y + this.size);
+    ctx.bezierCurveTo(this.x + this.size, this.y + this.size/3,
+                      this.x + this.size/2, this.y - this.size/2,
+                      this.x, this.y);
+    ctx.fill();
+  }
+
+  update() {
+    this.y -= this.speed;
+    this.draw();
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.push(new Heart());
+  particles.forEach((heart, index) => {
+    heart.update();
+    if (heart.y < -20) particles.splice(index, 1);
+  });
+  requestAnimationFrame(animate);
+}
+
+animate();
 </script>
 
 </body>
