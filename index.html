@@ -139,6 +139,8 @@ function startMusic() {
   }, 200);
 }
 
+document.body.addEventListener("click", startMusic, { once: true });
+
 // Browser requires user interaction to start audio
 window.addEventListener("click", startMusic, { once: true });
 // Typewriter Effect
